@@ -81,10 +81,11 @@ public static class ConfigManager {
     static ConfigNode Root { get; } = new();
 
     public static void InitializeBadWordsDictionary() {
-        Logger.Information("Initializing bad words");
+        Logger.Information("Initializing bad words file");
 
         string filePath = Path.Combine(ResourcesPath, badWordsFilePath);
         BadWordsPatterns = LoadAndProcessWords(filePath);
+        Logger.Information("Bad words file created");
     }
 
     /// <summary>
@@ -109,7 +110,7 @@ public static class ConfigManager {
                 }
             }
             patterns.Add(word, pattern);
-            Logger.Information($"Adding {word}, with pattern: {pattern}");
+            Logger.Verbose($"Adding {word}, with pattern: {pattern}");
         }
 
         return patterns;
