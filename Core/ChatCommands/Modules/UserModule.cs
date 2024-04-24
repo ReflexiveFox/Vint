@@ -1,7 +1,5 @@
 using System.Reflection;
 using System.Text;
-using Serilog;
-using Serilog.Core;
 using Vint.Core.ChatCommands.Attributes;
 using Vint.Core.Database;
 using Vint.Core.Database.Models;
@@ -10,7 +8,6 @@ namespace Vint.Core.ChatCommands.Modules;
 
 [ChatCommandGroup("user", "Commands for all players", PlayerGroups.None)]
 public class UserModule : ChatCommandModule {
-    //ILogger Logger { get; } = Log.Logger.ForType(typeof(ChatCommandModule));
     [ChatCommand("help", "Show list of commands or usage of specified command")]
     public void Help(
         ChatCommandContext ctx,
@@ -96,7 +93,6 @@ public class UserModule : ChatCommandModule {
         Statistics? statistics = db.Statistics.SingleOrDefault(stats => stats.PlayerId==ctx.Connection.Player.Id);
 
         if (statistics is null) {
-            //Logger.Information("Statistics is null");
             return;
         }
         ctx.SendPrivateResponse($"Hello world!");
