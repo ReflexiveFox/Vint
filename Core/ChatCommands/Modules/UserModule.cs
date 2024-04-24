@@ -86,15 +86,7 @@ public class UserModule : ChatCommandModule {
         ctx.SendPrivateResponse(builder.ToString());
     }
 
-    [ChatCommand("greet", "Greet the server!")]
-    public void Greet(ChatCommandContext ctx) {
-        using DbConnection db = new();
-
-        Statistics? statistics = db.Statistics.SingleOrDefault(stats => stats.PlayerId==ctx.Connection.Player.Id);
-
-        if (statistics is null) {
-            return;
-        }
-        ctx.SendPrivateResponse($"Hello world!");
-    }
+    [ChatCommand("hello", "Greet the server!")]
+    public void Greet(ChatCommandContext ctx) =>
+        ctx.SendPrivateResponse($"Hello {ctx.Connection.Player.Username}!");
 }
